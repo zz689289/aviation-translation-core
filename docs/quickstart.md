@@ -1,6 +1,6 @@
 # Windows quickstart
 
-This unpublished candidate runs offline after dependencies are present. It does not translate text or approve publication. No Git checkout or Skill installation is required: use the local candidate folder you were given.
+This public pre-release source repository runs offline after dependencies are present. It does not translate text or approve publication. Use a Git checkout or downloaded source archive; no Git expertise or Skill installation is required to run the existing offline demo. No tagged release or support promise is provided.
 
 ## 1. Locate inputs and choose private work
 

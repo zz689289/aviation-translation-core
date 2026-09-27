@@ -2,7 +2,7 @@
 
 [简体中文](README.zh-CN.md)
 
-**Unpublished candidate.** A lightweight core of rules, mechanical checks and QA handoff for English-to-Chinese civil-aviation technical translation. The existing skill identifier is `aviation-translation-core`; this directory is not an installed Skill. No public repository or public release exists as part of this delivery.
+**Public pre-release source repository.** A lightweight core of rules, mechanical checks and QA handoff for English-to-Chinese civil-aviation technical translation. The existing skill identifier is `aviation-translation-core`; this directory is not an installed Skill. No tagged GitHub Release has been published yet.
 
 For translators and reviewers who can prepare independent source evidence and review unresolved meaning. Scripts **do not translate**. The English and Chinese demo inputs are original synthetic material, not model-performance results or evidence of real translation quality.
 
@@ -43,7 +43,7 @@ Source provenance is `USER_REPORTED_AI_ASSISTED`, not an exclusive-authorship gu
 
 Copyright (c) 2026 Hug800mhz. The project's own core, rules/documentation and original examples are provided under the standard [MIT License](LICENSE). Third-party dependencies retain their respective licenses; this grant does not cover input documents or other parties' materials. Preserve the copyright and permission notices in all copies or substantial portions as required by LICENSE. Optional acknowledgement does not replace these notices.
 
-The project remains unpublished; that status does not invalidate the MIT permissions supplied with this copy. See [third-party notices](THIRD_PARTY_NOTICES.md) for the reviewed source-only dependency scope and the separate terms governing user-installed dependencies.
+The repository is public; no tagged release has been published yet. That status does not invalidate the MIT permissions supplied with this copy. See [third-party notices](THIRD_PARTY_NOTICES.md) for the reviewed source-only dependency scope and the separate terms governing user-installed dependencies.
 
 ### Acknowledgement (optional)
 

@@ -2,7 +2,7 @@
 
 ## Unreleased
 
-These entries describe private candidate work, not historical public releases.
+These entries include private prepublication engineering history and subsequent public-repository synchronization. No tagged release has been published yet.
 
 ### Initial private candidate (internal 0.1.0-candidate)
 
@@ -31,3 +31,7 @@ Recorded PASS_WITH_SCOPE for the seven exact dependency versions under source-on
 ### Dedicated-scan continuation
 
 Resumed the same preflight after browser delivery of checksum-matching official Gitleaks v8.30.0 assets. The private synthetic positive control was detected by default rules with full redaction. Repository-stage worktree/staging/history checks and private reporting configuration remain separate future steps. No runtime code, dependency lock or project tests changed.
+
+### Initial public repository publication
+
+Recorded the initial public `main` push at first commit `e9f6c9335b6a407bbf2012001975251d59498cf2`. Repository-level worktree, staging and Git-history Gitleaks checks had zero unresolved findings; GitHub recognized the MIT License; and the maintainer enabled private vulnerability reporting. This documentation sync replaces stale current-state “unpublished candidate” wording. It changes no runtime implementation, tests or dependencies, and no tagged release has been published yet.

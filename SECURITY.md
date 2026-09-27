@@ -1,6 +1,6 @@
 # Security and private material
 
-Private vulnerability reporting is **not configured**. A private channel and handling policy are publication prerequisites. There is no announced contact address, response deadline or supported-release program. Do not post credentials, sensitive findings or restricted source text to a public issue tracker. Until a private route is agreed, keep evidence local and ask for an authorized route without disclosing the sensitive content.
+Private vulnerability reporting is enabled for this public repository. Submit vulnerabilities privately through GitHub Security / Advisories by selecting **Report a vulnerability**. Do not post credentials, sensitive findings or restricted source text to a public issue. There is no announced contact address, response deadline or supported-release program. This repository setting is a private reporting channel, not a security guarantee supplied by the project code.
 
 Do not run unknown documents simply because a checker accepts JSON. The mechanical checks are not a complete PDF security scanner, malware sandbox or security guarantee. They check scoped content/binding consistency. Source-authority declarations and JSON reviewer names do not authenticate identity or independence. Review only authorized input, in a private working directory.
 
