@@ -1,0 +1,122 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "synthetic_test_only": {
+      "type": "boolean"
+    },
+    "units": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_-]{0,23}$"
+          },
+          "text": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 12000
+          },
+          "state": {
+            "enum": [
+              "COMPLETE",
+              "PENDING"
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "text",
+          "state"
+        ]
+      },
+      "minItems": 1,
+      "uniqueItems": false
+    },
+    "footnotes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_-]{0,23}$"
+          },
+          "anchor": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_-]{0,23}$"
+          },
+          "body": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 12000
+          },
+          "body_unit_id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_-]{0,23}$"
+          }
+        },
+        "required": [
+          "id",
+          "anchor",
+          "body",
+          "body_unit_id"
+        ]
+      },
+      "minItems": 0,
+      "uniqueItems": false
+    },
+    "tables": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_-]{0,23}$"
+          },
+          "mapping": {
+            "type": "object",
+            "minProperties": 1,
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "cells": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 12000
+            },
+            "minItems": 1,
+            "uniqueItems": true
+          }
+        },
+        "required": [
+          "id",
+          "mapping",
+          "cells"
+        ]
+      },
+      "minItems": 0,
+      "uniqueItems": false
+    },
+    "contract_version": {
+      "const": 2
+    }
+  },
+  "required": [
+    "synthetic_test_only",
+    "units",
+    "footnotes",
+    "tables",
+    "contract_version"
+  ]
+}

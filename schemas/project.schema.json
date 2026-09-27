@@ -1,0 +1,298 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "version": {
+      "const": 2
+    },
+    "scope": {
+      "enum": [
+        "full",
+        "declared_sample"
+      ]
+    },
+    "pages": {
+      "type": "array",
+      "items": {
+        "type": "integer",
+        "minimum": 1
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "page_count": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 12000
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      },
+      "required": [
+        "path",
+        "sha256"
+      ]
+    },
+    "target": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 12000
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      },
+      "required": [
+        "path",
+        "sha256"
+      ]
+    },
+    "pdf": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 12000
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      },
+      "required": [
+        "path",
+        "sha256"
+      ]
+    },
+    "inspection": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "pdf_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "rationale": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 12000
+        }
+      },
+      "required": [
+        "pdf_sha256",
+        "rationale"
+      ]
+    },
+    "layers": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "ordinary": {
+          "enum": [
+            "PRESENT",
+            "ABSENT",
+            "UNSUPPORTED"
+          ]
+        },
+        "table_cells": {
+          "enum": [
+            "PRESENT",
+            "ABSENT",
+            "UNSUPPORTED"
+          ]
+        },
+        "formulas": {
+          "enum": [
+            "PRESENT",
+            "ABSENT",
+            "UNSUPPORTED"
+          ]
+        },
+        "captions": {
+          "enum": [
+            "PRESENT",
+            "ABSENT",
+            "UNSUPPORTED"
+          ]
+        },
+        "image_semantics": {
+          "enum": [
+            "PRESENT",
+            "ABSENT",
+            "UNSUPPORTED"
+          ]
+        },
+        "footnotes": {
+          "enum": [
+            "PRESENT",
+            "ABSENT",
+            "UNSUPPORTED"
+          ]
+        },
+        "references": {
+          "enum": [
+            "PRESENT",
+            "ABSENT",
+            "UNSUPPORTED"
+          ]
+        },
+        "front_back_matter": {
+          "enum": [
+            "PRESENT",
+            "ABSENT",
+            "UNSUPPORTED"
+          ]
+        },
+        "branding_fields": {
+          "enum": [
+            "PRESENT",
+            "ABSENT",
+            "UNSUPPORTED"
+          ]
+        }
+      },
+      "required": [
+        "ordinary",
+        "table_cells",
+        "formulas",
+        "captions",
+        "image_semantics",
+        "footnotes",
+        "references",
+        "front_back_matter",
+        "branding_fields"
+      ]
+    },
+    "vocabulary": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "units": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 12000
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        },
+        "identifiers": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 12000
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        },
+        "symbols": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 12000
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "units",
+        "identifiers",
+        "symbols"
+      ]
+    },
+    "pollution_tokens": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 12000
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "term_rules": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_-]{0,23}$"
+          },
+          "forms": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 12000
+            },
+            "minItems": 1,
+            "uniqueItems": true
+          },
+          "case_sensitive": {
+            "type": "boolean"
+          },
+          "forbidden_targets": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 12000
+            },
+            "minItems": 0,
+            "uniqueItems": true
+          },
+          "required_target": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "forms",
+          "case_sensitive",
+          "forbidden_targets",
+          "required_target"
+        ]
+      },
+      "minItems": 1,
+      "uniqueItems": false
+    }
+  },
+  "required": [
+    "version",
+    "scope",
+    "pages",
+    "page_count",
+    "source",
+    "target",
+    "pdf",
+    "inspection",
+    "layers",
+    "vocabulary",
+    "pollution_tokens",
+    "term_rules"
+  ]
+}

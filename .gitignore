@@ -1,0 +1,12 @@
+.venv/
+__pycache__/
+*.py[cod]
+*.log
+private/
+runs/
+tmp/
+user_materials/
+.env
+.env.*
+local_config.*
+private_run/

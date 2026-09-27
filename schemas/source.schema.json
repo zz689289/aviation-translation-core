@@ -1,0 +1,215 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "basis": {
+      "enum": [
+        "INDEPENDENT_SOURCE"
+      ]
+    },
+    "derived_from_target": {
+      "type": "boolean"
+    },
+    "synthetic_test_only": {
+      "type": "boolean"
+    },
+    "pdf_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "units": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_-]{0,23}$"
+          },
+          "page": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "layer": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_-]{0,23}$"
+          },
+          "text": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 12000
+          },
+          "evidence_sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "expected": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "numbers": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 12000
+                },
+                "minItems": 0,
+                "uniqueItems": false
+              },
+              "units": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 12000
+                },
+                "minItems": 0,
+                "uniqueItems": false
+              },
+              "identifiers": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 12000
+                },
+                "minItems": 0,
+                "uniqueItems": false
+              },
+              "symbols": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 12000
+                },
+                "minItems": 0,
+                "uniqueItems": false
+              },
+              "markers": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 12000
+                },
+                "minItems": 0,
+                "uniqueItems": false
+              }
+            },
+            "required": [
+              "numbers",
+              "units",
+              "identifiers",
+              "symbols",
+              "markers"
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "page",
+          "layer",
+          "text",
+          "evidence_sha256",
+          "expected"
+        ]
+      },
+      "minItems": 1,
+      "uniqueItems": false
+    },
+    "footnotes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_-]{0,23}$"
+          },
+          "anchor": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_-]{0,23}$"
+          },
+          "body": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 12000
+          },
+          "body_unit_id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_-]{0,23}$"
+          }
+        },
+        "required": [
+          "id",
+          "anchor",
+          "body",
+          "body_unit_id"
+        ]
+      },
+      "minItems": 0,
+      "uniqueItems": false
+    },
+    "tables": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_-]{0,23}$"
+          },
+          "coordinates": {
+            "type": "object",
+            "minProperties": 1,
+            "additionalProperties": {
+              "type": "string",
+              "pattern": "^[a-z][a-z0-9_-]{0,23}$"
+            }
+          },
+          "repeated_header_aliases": {
+            "type": "array",
+            "items": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 12000
+              },
+              "minItems": 2,
+              "uniqueItems": true
+            },
+            "minItems": 0,
+            "uniqueItems": false
+          }
+        },
+        "required": [
+          "id",
+          "coordinates",
+          "repeated_header_aliases"
+        ]
+      },
+      "minItems": 0,
+      "uniqueItems": false
+    },
+    "contract_version": {
+      "const": 2
+    }
+  },
+  "required": [
+    "basis",
+    "derived_from_target",
+    "synthetic_test_only",
+    "pdf_sha256",
+    "units",
+    "footnotes",
+    "tables",
+    "contract_version"
+  ]
+}
