@@ -2,7 +2,17 @@
 
 ## Unreleased
 
-These entries include private prepublication engineering history and subsequent public-repository synchronization. No tagged release has been published yet.
+No changes yet.
+
+## [0.1.1] - 2026-09-28
+
+The initial public release includes the translation rules, terminology and evidence contracts, mechanical consistency checks, original synthetic demo and tests, and Windows quickstart.
+
+### Release verification and limits
+
+Release evidence covers the original synthetic demo, the three mechanical entry points, and the 99-case Windows regression record (98 passed, zero failed, one file-symlink case NOT_TESTED on the restricted Windows account). The accepted same-machine CPython 3.12.14 / Windows x64 fresh-install evidence verified the seven locked dependencies and `pip check`; the current release regression is recorded separately. Source-only dependency license scope, the standard MIT License, the Gitleaks positive control, candidate/worktree/staged/history scans, initial public repository publication and public-status synchronization are recorded. Private vulnerability reporting is enabled.
+
+Current limits remain: no automatic translation, no trusted host QA adapter, no Word/PDF publication pipeline, and limited platform/support evidence. The restricted-account symlink test remains NOT_TESTED unless a current run proves otherwise. Real host QA has not been executed.
 
 ### Initial private candidate (internal 0.1.0-candidate)
 
@@ -34,4 +44,4 @@ Resumed the same preflight after browser delivery of checksum-matching official 
 
 ### Initial public repository publication
 
-Recorded the initial public `main` push at first commit `e9f6c9335b6a407bbf2012001975251d59498cf2`. Repository-level worktree, staging and Git-history Gitleaks checks had zero unresolved findings; GitHub recognized the MIT License; and the maintainer enabled private vulnerability reporting. This documentation sync replaces stale current-state “unpublished candidate” wording. It changes no runtime implementation, tests or dependencies, and no tagged release has been published yet.
+Recorded the initial public `main` push at first commit `e9f6c9335b6a407bbf2012001975251d59498cf2`. Repository-level worktree, staging and Git-history Gitleaks checks had zero unresolved findings; GitHub recognized the MIT License; and the maintainer enabled private vulnerability reporting. This documentation sync replaced stale current-state “unpublished candidate” wording without changing runtime implementation, tests or dependencies. At that initial repository-publication stage, no tagged release existed.

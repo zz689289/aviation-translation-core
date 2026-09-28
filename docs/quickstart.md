@@ -1,6 +1,6 @@
 # Windows quickstart
 
-This public pre-release source repository runs offline after dependencies are present. It does not translate text or approve publication. Use a Git checkout or downloaded source archive; no Git expertise or Skill installation is required to run the existing offline demo. No tagged release or support promise is provided.
+This public v0.1.1 source release runs offline after dependencies are present. It does not translate text or approve publication. Use a Git checkout or downloaded source archive; no Git expertise or Skill installation is required to run the existing offline demo. No broader platform or support promise is provided.
 
 ## 1. Locate inputs and choose private work
 

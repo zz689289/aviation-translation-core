@@ -1,4 +1,4 @@
-"""Private candidate helpers. No environment discovery or reduced validator fallback."""
+"""Shared helpers for Aviation Translation Core. No environment discovery or reduced validator fallback."""
 import argparse
 import hashlib
 import json
