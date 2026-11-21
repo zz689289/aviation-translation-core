@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/aviation-technical-translation/build_record.schema.json",
+  "title": "Immutable source-block consumption ledger",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "build_id", "project_id", "mode", "project_config_sha256", "input_files", "records", "derived_summary"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "build_id": {"type": "string"},
+    "project_id": {"type": "string"},
+    "mode": {"enum": ["translation_only", "publication_grade_docx"]},
+    "project_config_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "cost_profile": {"enum": ["economy", "balanced", "maximum_quality"]},
+    "layout_profile_id": {"enum": ["source_faithful", "zh_formal_print", "personal_zh_review", "personal_paper_review"]},
+    "layout_profile_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "source_manifest_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "input_files": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "path", "sha256"],
+        "properties": {
+          "id": {"type": "string"},
+          "path": {"type": "string"},
+          "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+        }
+      }
+    },
+    "records": {
+      "type": "array",
+      "items": {
+        "type": "object", "additionalProperties": false, "required": ["source_block_ids", "output_object_ids", "status"],
+        "properties": {
+          "source_block_ids": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string"}},
+          "output_object_ids": {"type": "array", "items": {"type": "string"}},
+          "status": {"enum": ["written", "converted", "merged", "intentional_skip"]},
+          "target": {"type": "string"}, "merged_into": {"type": "string"}, "reason": {"type": "string"},
+          "owner_heading_id": {"type": "string"}
+        }
+      }
+    },
+    "derived_summary": {
+      "type": "object", "additionalProperties": false, "required": ["source_total", "recorded_total", "unconsumed"],
+      "properties": {
+        "source_total": {"type": "integer", "minimum": 0}, "recorded_total": {"type": "integer", "minimum": 0}, "unconsumed": {"type": "integer", "minimum": 0},
+        "written": {"type": "integer", "minimum": 0}, "converted": {"type": "integer", "minimum": 0}, "merged": {"type": "integer", "minimum": 0}, "intentional_skip": {"type": "integer", "minimum": 0}
+      }
+    }
+  }
+}

@@ -1,8 +1,10 @@
 # Changelog
 
-## Unreleased
+## Installable Skill 1.2.2-rc7 · 2026-11-21
 
-No changes yet.
+- Publish the full Codex skill in `skills/aviation-technical-translation`, with an installation prompt, bilingual translation prompt and a checksummed ZIP.
+- Include atomic long-document checkpoints, context-sensitive terminology review, font and spacing measurements and a headless PDF smoke test.
+- Use per-user configuration for optional Word export. Include only synthetic examples. The original standalone core remains available as v0.1.1.
 
 ## [0.1.1] - 2026-09-28
 

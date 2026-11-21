@@ -1,0 +1,6 @@
+{
+  "schema_version": "1.0",
+  "figures": [
+    {"schema_version":"1.0","id":"fig-flight-envelope","figure_number":"A","source_locator":{"page":4},"source_caption":"Flight-envelope example","target_caption":"图 A 飞行包线示例","path":"assets/fig-flight-envelope-zh.png","localized":true,"approved":true,"revision":"approved-1","caption_embedded":false,"placement_profile":"body-wide","width_cm":14.5,"verification":["aspect_ratio","arrow_clearance"],"qa_flags":["SOURCE_TEXT_NOT_EXTRACTABLE"],"provenance":{"source_asset_id":"source-en","method":"synthetic_fixture"}}
+  ]
+}

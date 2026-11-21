@@ -1,0 +1,9 @@
+{
+  "schema_version": "1.0",
+  "source_basis": {"asset_id": "source-en", "pages": [1, 2, 3, 6]},
+  "entries": [
+    {"block_id": "cover-title", "include": false, "level": 1, "source_style": "Heading 1", "target_style": "Heading1 NoTOC"},
+    {"block_id": "method-title", "include": true, "level": 1, "source_style": "Heading 1", "target_style": "Heading1"},
+    {"block_id": "annex-title", "include": true, "level": 1, "source_style": "Heading 1", "target_style": "Heading1"}
+  ]
+}

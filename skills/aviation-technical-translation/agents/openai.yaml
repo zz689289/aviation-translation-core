@@ -1,0 +1,6 @@
+interface:
+  display_name: "航空技术翻译与审校"
+  short_description: "航空论文与技术指南中文翻译，源文样式核验、增量修订及独立审校"
+  default_prompt: "使用 $aviation-technical-translation 翻译所附文献，按指定格式交付（默认中文 PDF）。沿用原文栏式、边注、页底脚注和图表布局，默认中文正文宋体12pt、标题黑体（主标题16pt）、西文 Times New Roman、正文基线距18pt，可按本次提示修改。普通正文页偏空时适当放大字号与行距，保持同类页面一致。长文在一次请求内分批续接、核对跨页语境，使用命令行渲染与两种提取器检查，全程禁用 Computer Use。将小样和首交渲染页与原页对照，核对段前、图前和表前净空。执行与验收测试用 gpt-6.2-sol/high，独立 QA 默认 gpt-6.2-sol/medium，仅具体难项可升 high。"
+policy:
+  allow_implicit_invocation: true

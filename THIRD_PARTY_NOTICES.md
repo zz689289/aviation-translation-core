@@ -17,3 +17,7 @@ This repository distributes project source, rules/documentation, original exampl
 This records the supplied exact-version official-source license review for the source-only distribution scope. It is not a third-party security audit, nor a claim that all upstream copyright or NOTICE texts were freshly read here. The historical PENDING_PUBLIC_RELEASE_REVIEW entries in [dependency provenance](docs/dependency_provenance.json) remain unchanged; the current source-only scope conclusion is stated above. Failure to re-download wheels is not a blocker for this scope.
 
 Any future distribution of wheels, offline dependency bundles, installers, executables or copied third-party source requires a new distribution-license and NOTICE review. Preserve applicable upstream notices in that future distribution; do not replace their authorship with project attribution.
+
+## Installable translation skill
+
+The full skill in `skills/aviation-technical-translation` uses separately installed PyMuPDF, pypdfium2/PDFium, pypdf, Pillow, ReportLab, PyYAML and jsonschema for PDF work. DOCX paths additionally use python-docx, lxml and optionally a licensed Microsoft Word installation. FontTools, OCR engines and Poppler are optional for relevant inputs. Obtain fonts and software under their respective licenses. The ZIP contains project source, templates, checks and original synthetic fixtures. The package manifest lists all distributed files.

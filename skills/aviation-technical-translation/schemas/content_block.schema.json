@@ -1,0 +1,82 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/aviation-technical-translation/content_block.schema.json",
+  "title": "Structured bilingual content block",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "id", "source_locator", "block_type", "source_text", "target_text", "provenance"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "id": {"type": "string", "minLength": 1},
+    "source_locator": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["page", "order"],
+      "properties": {
+        "page": {"type": "integer", "minimum": 1},
+        "pages": {"type": "array", "items": {"type": "integer", "minimum": 1}, "minItems": 1, "uniqueItems": true},
+        "order": {"type": "integer", "minimum": 1},
+        "bbox": {"type": "array", "items": {"type": "number"}, "minItems": 4, "maxItems": 4}
+      }
+    },
+    "section_path": {"type": "array", "items": {"type": "string"}},
+    "block_type": {"enum": ["heading", "paragraph", "list_item", "bibliography", "table", "figure", "formula", "footnote_anchor", "requirement", "regulatory_quote", "toc", "page_break", "section_break"]},
+    "source_text": {"type": "string"},
+    "translation_reference_text": {"type": "string"},
+    "target_text": {"type": "string"},
+    "style_ref": {"type": "string"},
+    "heading_level": {"type": "integer", "minimum": 1, "maximum": 9},
+    "toc_policy": {"enum": ["include", "exclude", "not_applicable"]},
+    "list": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["level", "marker"],
+      "properties": {"level": {"type": "integer", "minimum": 0}, "marker": {"type": "string"}}
+    },
+    "table_id": {"type": "string"},
+    "figure_id": {"type": "string"},
+    "formula_id": {"type": "string"},
+    "footnote_id": {"type": "string"},
+    "section_id": {"type": "string"},
+    "owner_ref": {"$ref": "#/$defs/headingOwner"},
+    "source_owner_ref": {"$ref": "#/$defs/headingOwner"},
+    "merge_into": {"type": "string"},
+    "merge_strategy": {"enum": ["target_contains_source"]},
+    "keep_with_next": {"type": "boolean"},
+    "qa_flags": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "notes": {"type": "array", "items": {"type": "string"}},
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source_asset_id", "method"],
+      "properties": {
+        "source_asset_id": {"type": "string", "minLength": 1},
+        "method": {"enum": ["manual", "pdf_text", "ocr", "machine_alignment", "imported_map", "synthetic_fixture"]},
+        "revision": {"type": "string"},
+        "decision_ids": {"type": "array", "items": {"type": "string"}, "uniqueItems": true}
+      }
+    }
+  },
+  "allOf": [
+    {"if": {"properties": {"block_type": {"const": "heading"}}}, "then": {"required": ["heading_level", "toc_policy"]}},
+    {"if": {"properties": {"block_type": {"const": "list_item"}}}, "then": {"required": ["list"]}},
+    {"if": {"properties": {"block_type": {"const": "table"}}}, "then": {"required": ["table_id"]}},
+    {"if": {"properties": {"block_type": {"const": "figure"}}}, "then": {"required": ["figure_id"]}},
+    {"if": {"properties": {"block_type": {"const": "formula"}}}, "then": {"required": ["formula_id"]}},
+    {"if": {"properties": {"block_type": {"const": "footnote_anchor"}}}, "then": {"required": ["footnote_id"]}},
+    {"if": {"properties": {"block_type": {"enum": ["requirement", "regulatory_quote"]}}}, "then": {"required": ["owner_ref", "source_owner_ref"]}},
+    {"if": {"properties": {"block_type": {"const": "section_break"}}}, "then": {"required": ["section_id"]}},
+    {"if": {"required": ["merge_into"]}, "then": {"required": ["merge_strategy"]}}
+  ],
+  "$defs": {
+    "headingOwner": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "id"],
+      "properties": {
+        "kind": {"const": "heading"},
+        "id": {"type": "string", "minLength": 1}
+      }
+    }
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/aviation-technical-translation/figure_asset.schema.json",
+  "title": "Approved localized figure asset",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "id", "source_locator", "path", "approved", "localized", "caption_embedded", "provenance"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "id": {"type": "string"},
+    "figure_number": {"type": ["string", "integer"]},
+    "source_locator": {
+      "type": "object",
+      "required": ["page"],
+      "additionalProperties": false,
+      "properties": {
+        "page": {"type": "integer", "minimum": 1},
+        "pages": {"type": "array", "items": {"type": "integer", "minimum": 1}, "minItems": 1, "uniqueItems": true}
+      }
+    },
+    "source_caption": {"type": "string"},
+    "target_caption": {"type": "string"},
+    "path": {"type": "string", "minLength": 1},
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "width_px": {"type": "integer", "minimum": 1},
+    "height_px": {"type": "integer", "minimum": 1},
+    "color_model": {"type": "string"},
+    "localized": {"type": "boolean"},
+    "approved": {"type": "boolean"},
+    "revision": {"type": "string"},
+    "caption_embedded": {"type": "boolean"},
+    "placement_profile": {"type": "string"},
+    "width_cm": {"type": "number", "exclusiveMinimum": 0},
+    "verification": {"type": "array", "items": {"type": "string"}},
+    "qa_flags": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source_asset_id", "method"],
+      "properties": {
+        "source_asset_id": {"type": "string", "minLength": 1},
+        "method": {"enum": ["manual", "pdf_text", "ocr", "machine_alignment", "imported_map", "synthetic_fixture"]},
+        "revision": {"type": "string"},
+        "decision_ids": {"type": "array", "items": {"type": "string"}, "uniqueItems": true}
+      }
+    }
+  }
+}

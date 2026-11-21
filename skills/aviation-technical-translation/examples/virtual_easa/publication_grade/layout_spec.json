@@ -1,0 +1,24 @@
+{
+  "schema_version": "1.0",
+  "units": "cm",
+  "page_defaults": {
+    "width_cm": 21.0,
+    "height_cm": 29.7,
+    "orientation": "portrait",
+    "margins": {"top": 2.3, "bottom": 2.2, "left": 2.4, "right": 2.1},
+    "header_distance_cm": 1.0,
+    "footer_distance_cm": 1.2
+  },
+  "colors": {"accent": "1F5D7A", "text": "222222"},
+  "styles": {
+    "Body": {"font_latin": "Arial", "font_cjk": "Microsoft YaHei", "size_pt": 10.5, "color": "222222", "alignment": "justify", "line_spacing": 1.25, "space_before_pt": 0, "space_after_pt": 6, "keep_with_next": false, "keep_lines_together": false, "outline_level": null},
+    "Heading1": {"font_latin": "Arial", "font_cjk": "Microsoft YaHei", "size_pt": 16, "bold": true, "color": "1F5D7A", "alignment": "left", "line_spacing": 1.0, "space_before_pt": 12, "space_after_pt": 6, "keep_with_next": true, "keep_lines_together": true, "outline_level": 0},
+    "Heading1 NoTOC": {"font_latin": "Arial", "font_cjk": "Microsoft YaHei", "size_pt": 16, "bold": true, "color": "1F5D7A", "alignment": "left", "line_spacing": 1.0, "space_before_pt": 12, "space_after_pt": 6, "keep_with_next": true, "keep_lines_together": true, "outline_level": null}
+  },
+  "sections": [
+    {"id": "annex-c", "break_type": "new_page", "page_number_start": null, "header_text": "Annex C", "footer_text": "EASA-NEXT D-7.2", "header_link_to_previous": false, "footer_link_to_previous": false}
+  ],
+  "object_profiles": {},
+  "toc": {"field_code": "TOC \\o \"1-3\" \\h \\z \\u", "levels": 3},
+  "render_policy": {"renderer": "word-com", "image_dpi": 300, "disable_image_compression": true}
+}

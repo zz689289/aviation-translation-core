@@ -1,10 +1,22 @@
-# Aviation Translation Core
+# Aviation Technical Translation for Codex
 
 [简体中文](README.zh-CN.md)
 
-**Public source repository — current release v0.1.1.** A lightweight core of rules, mechanical checks and QA handoff for English-to-Chinese civil-aviation technical translation. The existing skill identifier is `aviation-translation-core`; this directory is not an installed Skill.
+Translate English civil-aviation papers and manuals into Simplified Chinese. The installable **aviation-technical-translation 1.2.2-rc7** skill covers source layout, terminology, figures, tables, equations, long-document checkpoints and independent review.
 
-For translators and reviewers who can prepare independent source evidence and review unresolved meaning. Scripts **do not translate**. The English and Chinese demo inputs are original synthetic material, not model-performance results or evidence of real translation quality.
+1. [Download the installable ZIP](downloads/aviation-technical-translation-1.2.2-rc7.zip) and its [SHA-256 checksum](downloads/SHA256SUMS.txt), or use the versioned URLs in the [installation prompt](skills/aviation-technical-translation/prompts/INSTALL_PROMPT.md).
+2. Paste the installation prompt into Codex. It installs the skill and QA role for the current user, checks the selected fonts and runs a headless PDF smoke test.
+3. Start a translation with the English source and the [recommended prompt, Chinese or English](skills/aviation-technical-translation/prompts/TRANSLATION_PROMPT.md). Edit its first JSON block to change fonts, sizes and line spacing.
+
+Body text defaults to SimSun 12 pt on an 18 pt baseline, Chinese headings to SimHei, and Western text to Times New Roman. Set `allow_sparse_adjustment` to false for exact sizes. The recommended execution and acceptance setting is `gpt-6.2-sol/high`; independent QA defaults to `gpt-6.2-sol/medium`. High QA is scoped to documented difficult items. Verification uses file and command-line tools, with Computer Use disabled.
+
+![Original synthetic bilingual PDF layout sample](docs/images/synthetic-layout.png)
+
+This original example shows a two-line paragraph and its table rendered at the same scale. For long work, [checkpoint and resume batches](skills/aviation-technical-translation/references/long_translation.md) and [verify the final page typography](skills/aviation-technical-translation/references/typography_and_headless_qa.md). The optional [Word export path](skills/aviation-technical-translation/references/word_runtime_setup.md) requires local operator setup. Fonts and third-party runtimes are installed separately.
+
+## Standalone review core
+
+The original `aviation-translation-core` v0.1.1 CLI and synthetic demo are available at the repository root. The following sections describe that standalone core.
 
 ## What it checks
 
@@ -43,7 +55,7 @@ Source provenance is `USER_REPORTED_AI_ASSISTED`, not an exclusive-authorship gu
 
 Copyright (c) 2026 Hug800mhz. The project's own core, rules/documentation and original examples are provided under the standard [MIT License](LICENSE). Third-party dependencies retain their respective licenses; this grant does not cover input documents or other parties' materials. Preserve the copyright and permission notices in all copies or substantial portions as required by LICENSE. Optional acknowledgement does not replace these notices.
 
-The repository is public and the current software release is v0.1.1. The release status does not alter the MIT permissions supplied with this copy. See [third-party notices](THIRD_PARTY_NOTICES.md) for the reviewed source-only dependency scope and the separate terms governing user-installed dependencies.
+The standalone review core is v0.1.1. The release status does not alter the MIT permissions supplied with this copy. See [third-party notices](THIRD_PARTY_NOTICES.md) for the reviewed source-only dependency scope and the separate terms governing user-installed dependencies.
 
 ### Acknowledgement (optional)
 

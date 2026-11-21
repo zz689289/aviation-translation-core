@@ -1,0 +1,18 @@
+{
+  "schema_version":"1.1", "profile_id":"personal_zh_review",
+  "description":"OPT IN only. Chinese proofreading typography, not source geometry/counts/terminology. See personal_style.md; initialize semantic roles from each source.",
+  "inherits_source_geometry":true,"math_font":"Cambria Math",
+  "default_style_names":{"body":"Body","list":"List","requirement":"Requirement","bibliography":"Bibliography","heading_major":"Heading 1","heading_minor":"Heading 2","figure_caption":"Figure Caption","table_caption":"Table Caption","footnote":"FootnoteText","definition_label":"Definition Label"},
+  "style_defaults":{
+    "body":{"font_latin":"Times New Roman","font_cjk":"SimSun","size_pt":12},
+    "list":{"font_latin":"Times New Roman","font_cjk":"SimSun","size_pt":12},
+    "requirement":{"font_latin":"Times New Roman","font_cjk":"SimSun","size_pt":12},
+    "bibliography":{"font_latin":"Times New Roman","font_cjk":"SimSun","size_pt":12},
+    "heading_major":{"font_latin":"Times New Roman","font_cjk":"SimHei"},
+    "heading_minor":{"font_latin":"Times New Roman","font_cjk":"SimSun"},
+    "figure_caption":{"font_latin":"Times New Roman","font_cjk":"SimSun","size_pt":9,"alignment":"center"},
+    "table_caption":{"font_latin":"Times New Roman","font_cjk":"SimSun","size_pt":10.5},
+    "footnote":{"font_latin":"Times New Roman","font_cjk":"SimSun","size_pt":9},
+    "definition_label":{"font_latin":"Times New Roman","font_cjk":"SimSun","size_pt":12,"bold":true,"keep_with_next":true}
+  }
+}

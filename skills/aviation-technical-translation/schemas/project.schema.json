@@ -1,0 +1,111 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/aviation-technical-translation/project.schema.json",
+  "title": "Aviation translation project",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "project_id", "title", "languages", "requested_mode", "allow_downgrade", "paths", "inputs", "capabilities"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "project_id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]*$"},
+    "title": {"type": "string", "minLength": 1},
+    "deliverable_id": {"type": "string"},
+    "languages": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source", "target"],
+      "properties": {"source": {"const": "en"}, "target": {"const": "zh-CN"}}
+    },
+    "requested_mode": {"enum": ["auto", "translation_only", "publication_grade_docx"]},
+    "selected_mode": {"enum": ["translation_only", "publication_grade_docx"]},
+    "cost_profile": {"enum": ["economy", "balanced", "maximum_quality"]},
+    "escalation_mode": {"enum": ["manual_handoff", "auto_escalate"]},
+    "workflow": {
+      "type":"object","additionalProperties":false,
+      "properties":{
+        "profile":{"const":"executor_one_independent_qa_human"},
+        "qa_agent_count":{"const":1},
+        "recursive_dispatch":{"const":false},
+        "model_override":{"type":"null"},
+        "evidence_contract":{"const":"1.2"}
+      }
+    },
+    "allow_downgrade": {"type": "boolean"},
+    "paths": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["content"],
+      "properties": {
+        "content": {"$ref": "#/$defs/relativePath"},
+        "tables_dir": {"$ref": "#/$defs/relativePath"},
+        "formulas": {"$ref": "#/$defs/relativePath"},
+        "footnotes": {"$ref": "#/$defs/relativePath"},
+        "toc": {"$ref": "#/$defs/relativePath"},
+        "figures": {"$ref": "#/$defs/relativePath"},
+        "layout": {"$ref": "#/$defs/relativePath"},
+        "terminology": {"$ref": "#/$defs/relativePath"},
+        "source_manifest": {"$ref": "#/$defs/relativePath"}
+      }
+    },
+    "inputs": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/input"}
+    },
+    "capabilities": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["microsoft_word", "authoritative_renderer"],
+      "properties": {
+        "microsoft_word": {"type": "boolean"},
+        "authoritative_renderer": {"enum": ["word-com", "other", "none"]},
+        "renderer_available": {"type": "boolean"},
+        "fonts_verified": {"type": "boolean"}
+      }
+    },
+    "document": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "title": {"type": "string"},
+        "subject": {"type": "string"},
+        "creator": {"type": "string"},
+        "language": {"type": "string"}
+      }
+    },
+    "selection_reasons": {"type": "array", "items": {"type": "string"}},
+    "blocking_issues": {"type": "array", "items": {"type": "string"}}
+  },
+  "$defs": {
+    "relativePath": {"type": "string", "minLength": 1, "not": {"pattern": "^(?:[A-Za-z]:[\\\\/]|[\\\\/]{2}|/)"}},
+    "input": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "role", "path", "required", "read_only"],
+      "properties": {
+        "id": {"type": "string", "minLength": 1},
+        "role": {"enum": ["source_document", "translation_reference", "terminology", "localized_figure", "brand_asset", "layout_reference", "template"]},
+        "path": {"$ref": "#/$defs/relativePath"},
+        "media_type": {"type": "string"},
+        "language": {"type": "string"},
+        "authority_rank": {"type": "integer", "minimum": 1},
+        "required": {"type": "boolean"},
+        "read_only": {"type": "boolean"},
+        "approved": {"type": "boolean"},
+        "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "size_bytes": {"type": "integer", "minimum": 0},
+        "page_count": {"type": "integer", "minimum": 1},
+        "width_px": {"type": "integer", "minimum": 1},
+        "height_px": {"type": "integer", "minimum": 1},
+        "detection": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["method", "confidence"],
+          "properties": {
+            "method": {"enum": ["declared", "content", "filename_hint", "unknown"]},
+            "confidence": {"type": "number", "minimum": 0, "maximum": 1}
+          }
+        }
+      }
+    }
+  }
+}

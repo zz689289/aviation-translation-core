@@ -1,0 +1,63 @@
+{
+  "schema_version": "1.1",
+  "profile_id": "personal_paper_review",
+  "description": "仅用于已授权沿用的论文个人偏好；字号与间距从本篇样稿确定，不固定页数或配色。",
+  "inherits_source_geometry": true,
+  "math_font": "Cambria Math",
+  "default_style_names": {
+    "body": "Body",
+    "list": "List",
+    "requirement": "Requirement",
+    "bibliography": "Bibliography",
+    "heading_major": "Heading 1",
+    "heading_minor": "Heading 2",
+    "figure_caption": "Figure Caption",
+    "table_caption": "Table Caption",
+    "footnote": "FootnoteText",
+    "definition_label": "Definition Label"
+  },
+  "style_defaults": {
+    "body": {
+      "font_latin": "Times New Roman",
+      "font_cjk": "SimSun"
+    },
+    "list": {
+      "font_latin": "Times New Roman",
+      "font_cjk": "SimSun"
+    },
+    "requirement": {
+      "font_latin": "Times New Roman",
+      "font_cjk": "SimSun"
+    },
+    "bibliography": {
+      "font_latin": "Times New Roman",
+      "font_cjk": "SimSun"
+    },
+    "heading_major": {
+      "font_latin": "Times New Roman",
+      "font_cjk": "SimHei"
+    },
+    "heading_minor": {
+      "font_latin": "Times New Roman",
+      "font_cjk": "SimHei"
+    },
+    "figure_caption": {
+      "font_latin": "Times New Roman",
+      "font_cjk": "SimSun"
+    },
+    "table_caption": {
+      "font_latin": "Times New Roman",
+      "font_cjk": "SimSun"
+    },
+    "footnote": {
+      "font_latin": "Times New Roman",
+      "font_cjk": "SimSun"
+    },
+    "definition_label": {
+      "font_latin": "Times New Roman",
+      "font_cjk": "SimSun",
+      "bold": true,
+      "keep_with_next": true
+    }
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/aviation-technical-translation/toc_map.schema.json",
+  "title": "Explicit TOC whitelist",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "entries"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "source_basis": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {"asset_id": {"type": "string"}, "pages": {"type": "array", "items": {"type": "integer", "minimum": 1}, "uniqueItems": true}}
+    },
+    "visual_spacing_basis": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["review_required", "source_compared"],
+      "properties": {
+        "review_required": {"type": "boolean"},
+        "source_compared": {"type": "boolean"},
+        "notes": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    "entries": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["block_id", "include", "target_style"],
+        "properties": {
+          "block_id": {"type": "string"}, "include": {"type": "boolean"}, "level": {"type": "integer", "minimum": 1, "maximum": 9},
+          "source_style": {"type": "string"}, "target_style": {"type": "string"},
+          "source_spacing": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "space_before_pt": {"type": "number", "minimum": 0},
+              "space_after_pt": {"type": "number", "minimum": 0},
+              "group_id": {"type": "string"},
+              "role": {"enum": ["ordinary", "group_start", "special", "terminal"]}
+            }
+          }
+        }
+      }
+    }
+  }
+}

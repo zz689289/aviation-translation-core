@@ -1,0 +1,74 @@
+{
+  "schema_version": "1.0",
+  "project_id": "easa-next-translation-review",
+  "title": "EASA-NEXT terminology review",
+  "deliverable_id": "TR-ALPHA",
+  "languages": {
+    "source": "en",
+    "target": "zh-CN"
+  },
+  "requested_mode": "auto",
+  "selected_mode": "translation_only",
+  "allow_downgrade": false,
+  "paths": {
+    "content": "content/blocks.jsonl",
+    "tables_dir": "content/tables",
+    "formulas": "content/formulas.jsonl",
+    "footnotes": "content/footnotes.jsonl",
+    "toc": "content/toc.json",
+    "terminology": "inputs/approved_terms.csv",
+    "source_manifest": "source_manifest.json"
+  },
+  "inputs": [
+    {
+      "id": "source-en",
+      "role": "source_document",
+      "path": "inputs/easa-next-d7-2-en.pdf",
+      "media_type": "application/pdf",
+      "language": "en",
+      "authority_rank": 1,
+      "required": true,
+      "read_only": true,
+      "sha256": "830d504209def9fac46d7a6738fc9d7f94d93f6c7f00605562e4c2ad911033ca",
+      "size_bytes": 4447,
+      "detection": {
+        "method": "declared",
+        "confidence": 1.0
+      },
+      "page_count": 7
+    },
+    {
+      "id": "terms",
+      "role": "terminology",
+      "path": "inputs/approved_terms.csv",
+      "media_type": "text/csv",
+      "language": "bilingual",
+      "authority_rank": 2,
+      "required": false,
+      "read_only": true,
+      "sha256": "f8eb0fe719e7872d0873f5a6c14fb519a22cca9ade89322a25f9be33506b7834",
+      "size_bytes": 125,
+      "detection": {
+        "method": "declared",
+        "confidence": 1.0
+      },
+      "approved": true
+    }
+  ],
+  "capabilities": {
+    "microsoft_word": false,
+    "authoritative_renderer": "none",
+    "renderer_available": false,
+    "fonts_verified": false
+  },
+  "document": {
+    "title": "EASA-NEXT terminology review",
+    "subject": "English to Chinese translation review",
+    "creator": "",
+    "language": "zh-CN"
+  },
+  "selection_reasons": [
+    "No approved publication layout or renderer is supplied."
+  ],
+  "blocking_issues": []
+}

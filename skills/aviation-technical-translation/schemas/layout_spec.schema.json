@@ -1,0 +1,170 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/aviation-technical-translation/layout_spec.schema.json",
+  "title": "Publication layout profile",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "units", "page_defaults", "styles", "sections", "toc", "render_policy"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "profile_id": {"enum": ["source_faithful", "zh_formal_print", "personal_zh_review", "personal_paper_review"]},
+    "math_font": {"const": "Cambria Math"},
+    "units": {"const": "cm"},
+    "page_defaults": {"$ref": "#/$defs/page"},
+    "colors": {"type": "object", "additionalProperties": {"type": "string", "pattern": "^[0-9A-Fa-f]{6}$"}},
+    "styles": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "font_latin": {"type": "string"}, "font_cjk": {"type": "string"}, "size_pt": {"type": "number", "exclusiveMinimum": 0},
+          "bold": {"type": "boolean"}, "italic": {"type": "boolean"}, "color": {"type": "string", "pattern": "^[0-9A-Fa-f]{6}$"},
+          "alignment": {"enum": ["left", "center", "right", "justify"]}, "line_spacing": {"type": "number", "exclusiveMinimum": 0},
+          "space_before_pt": {"type": "number", "minimum": 0}, "space_after_pt": {"type": "number", "minimum": 0},
+          "left_indent_cm": {"type": "number"}, "first_line_indent_cm": {"type": "number"}, "tab_stop_cm": {"type": "number", "minimum": 0}, "keep_with_next": {"type": "boolean"},
+          "keep_lines_together": {"type": "boolean"}, "outline_level": {"type": ["integer", "null"], "minimum": 0, "maximum": 9}
+        }
+      }
+    },
+    "style_roles": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "body": {"type": "string"},
+        "list": {"type": "string"},
+        "requirement": {"type": "string"},
+        "bibliography": {"type": "string"},
+        "heading_major": {"type": "string"},
+        "heading_minor": {"type": "string"},
+        "figure_caption": {"type": "string"},
+        "table_caption": {"type": "string"},
+        "footnote": {"type": "string"},
+        "definition_label": {"type": "string"}
+      }
+    },
+    "sections": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "break_type"],
+        "properties": {
+          "id": {"type": "string"}, "break_type": {"enum": ["continuous", "new_page", "odd_page", "even_page"]},
+          "kind": {"enum": ["body", "annex", "bibliography", "back_cover", "other"]},
+          "page": {"$ref": "#/$defs/page"}, "page_number_start": {"type": ["integer", "null"], "minimum": 1},
+          "header_text": {"type": "string"}, "footer_text": {"type": "string"},
+          "header_link_to_previous": {"type": "boolean"}, "footer_link_to_previous": {"type": "boolean"},
+          "title_spacing_override": {"$ref": "#/$defs/paragraphSpacingOverride"}
+        }
+      }
+    },
+    "object_profiles": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "figure": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {"width_cm": {"type": "number", "exclusiveMinimum": 0}}
+          }
+        },
+        "bibliography": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["left_indent_cm", "hanging_indent_cm", "tab_stop_cm"],
+          "properties": {
+            "left_indent_cm": {"type": "number", "minimum": 0},
+            "hanging_indent_cm": {"type": "number", "minimum": 0},
+            "tab_stop_cm": {"type": "number", "minimum": 0}
+          }
+        }
+      }
+    },
+    "brand_assets": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "asset_type", "required"],
+        "properties": {
+          "id": {"type": "string", "minLength": 1},
+          "asset_type": {"enum": ["flag", "logo", "seal", "other"]},
+          "required": {"type": "boolean"},
+          "source_locator": {"type": "string"},
+          "placement_role": {"type": "string"}
+        }
+      }
+    },
+    "toc": {
+      "type": "object", "additionalProperties": false, "required": ["field_code", "levels"],
+      "properties": {
+        "field_code": {"type": "string"},
+        "levels": {"type": "integer", "minimum": 1, "maximum": 9},
+        "visual_spacing_policy": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["required", "compare_terminal_entry", "compare_group_spacing", "compare_special_entries"],
+          "properties": {
+            "required": {"type": "boolean"},
+            "compare_terminal_entry": {"type": "boolean"},
+            "compare_group_spacing": {"type": "boolean"},
+            "compare_special_entries": {"type": "boolean"},
+            "tolerance_pt": {"type": "number", "minimum": 0}
+          }
+        }
+      }
+    },
+    "render_policy": {
+      "type": "object", "additionalProperties": false, "required": ["renderer", "image_dpi", "disable_image_compression"],
+      "properties": {
+        "renderer": {"enum": ["word-com", "other"]},
+        "image_dpi": {"type": "integer", "minimum": 72},
+        "disable_image_compression": {"type": "boolean"},
+        "stability_runs": {"type": "integer", "minimum": 2}
+      }
+    },
+    "regression_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["approved_changed_pages", "unapproved_pages_exact"],
+      "properties": {
+        "approved_changed_pages": {
+          "type": "array",
+          "items": {"type": "integer", "minimum": 1},
+          "uniqueItems": true
+        },
+        "unapproved_pages_exact": {"const": true}
+      }
+    }
+  },
+  "$defs": {
+    "paragraphSpacingOverride": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "space_before_pt": {"type": "number", "minimum": 0},
+        "space_after_pt": {"type": "number", "minimum": 0},
+        "line_spacing": {"type": "number", "exclusiveMinimum": 0},
+        "left_indent_cm": {"type": "number"},
+        "first_line_indent_cm": {"type": "number"},
+        "tab_stop_cm": {"type": "number", "minimum": 0}
+      },
+      "minProperties": 1
+    },
+    "page": {
+      "type": "object", "additionalProperties": false, "required": ["width_cm", "height_cm", "margins"],
+      "properties": {
+        "width_cm": {"type": "number", "exclusiveMinimum": 0}, "height_cm": {"type": "number", "exclusiveMinimum": 0},
+        "orientation": {"enum": ["portrait", "landscape"]},
+        "margins": {
+          "type": "object", "additionalProperties": false, "required": ["top", "bottom", "left", "right"],
+          "properties": {"top": {"type": "number", "minimum": 0}, "bottom": {"type": "number", "minimum": 0}, "left": {"type": "number", "minimum": 0}, "right": {"type": "number", "minimum": 0}}
+        },
+        "header_distance_cm": {"type": "number", "minimum": 0}, "footer_distance_cm": {"type": "number", "minimum": 0}
+      }
+    }
+  }
+}

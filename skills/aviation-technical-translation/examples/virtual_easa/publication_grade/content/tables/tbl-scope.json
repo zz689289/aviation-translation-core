@@ -1,0 +1,18 @@
+{
+  "schema_version": "1.0",
+  "id": "tbl-scope",
+  "source_locator": {"page": 5},
+  "caption": {"source": "Table 1 — Scope matrix", "target": "表 1——范围矩阵", "position": "above"},
+  "columns": [
+    {"id": "phase", "source_text": "Phase", "target_text": "阶段", "width_cm": 5.5, "alignment": "left", "data_type": "text"},
+    {"id": "evidence", "source_text": "Evidence", "target_text": "证据", "width_cm": 9.0, "alignment": "left", "data_type": "text"}
+  ],
+  "rows": [
+    {"id": "row-analysis", "cells": [{"source_text": "Analysis", "target_text": "分析", "kind": "text"}, {"source_text": "Validated model", "target_text": "已验证模型", "kind": "text"}]}
+  ],
+  "header_row_count": 1,
+  "style_profile": "default-table",
+  "allow_row_break": false,
+  "qa_flags": ["SOURCE_TEXT_NOT_EXTRACTABLE"],
+  "provenance": {"source_asset_id": "source-en", "method": "synthetic_fixture"}
+}

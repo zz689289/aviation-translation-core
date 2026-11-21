@@ -1,4 +1,6 @@
-# Windows quickstart
+# Windows quickstart for the standalone v0.1.1 core
+
+To install the full Codex translation Skill, use the [rc7 installation prompt](../skills/aviation-technical-translation/prompts/INSTALL_PROMPT.md).
 
 This public v0.1.1 source release runs offline after dependencies are present. It does not translate text or approve publication. Use a Git checkout or downloaded source archive; no Git expertise or Skill installation is required to run the existing offline demo. No broader platform or support promise is provided.
 

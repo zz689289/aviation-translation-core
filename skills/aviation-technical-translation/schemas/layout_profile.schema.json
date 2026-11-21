@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/aviation-technical-translation/layout_profile.schema.json",
+  "title": "Reusable aviation publication layout profile",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "profile_id", "inherits_source_geometry", "math_font", "default_style_names", "style_defaults"],
+  "properties": {
+    "schema_version": {"const": "1.1"},
+    "profile_id": {"enum": ["source_faithful", "zh_formal_print", "personal_zh_review", "personal_paper_review"]},
+    "description": {"type": "string"},
+    "inherits_source_geometry": {"const": true},
+    "math_font": {"const": "Cambria Math"},
+    "default_style_names": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "body": {"type": "string"},
+        "list": {"type": "string"},
+        "requirement": {"type": "string"},
+        "bibliography": {"type": "string"},
+        "heading_major": {"type": "string"},
+        "heading_minor": {"type": "string"},
+        "figure_caption": {"type": "string"},
+        "table_caption": {"type": "string"},
+        "footnote": {"type": "string"},
+        "definition_label": {"type": "string"}
+      }
+    },
+    "style_defaults": {
+      "type": "object",
+      "additionalProperties": {"$ref": "#/$defs/styleDefaults"}
+    }
+  },
+  "$defs": {
+    "styleDefaults": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "font_latin": {"type": "string"},
+        "font_cjk": {"type": "string"},
+        "size_pt": {"type": "number", "exclusiveMinimum": 0},
+        "bold": {"type": "boolean"},
+        "italic": {"type": "boolean"},
+        "alignment": {"enum": ["left", "center", "right", "justify"]},
+        "space_before_pt": {"type": "number", "minimum": 0},
+        "space_after_pt": {"type": "number", "minimum": 0},
+        "keep_with_next": {"type": "boolean"}
+      }
+    }
+  }
+}

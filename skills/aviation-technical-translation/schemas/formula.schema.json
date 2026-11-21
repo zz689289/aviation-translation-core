@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/aviation-technical-translation/formula.schema.json",
+  "title": "Formula mapped to Word OMML",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "id", "source_locator", "anchor_block_ids", "placement", "source_representation", "normalized_expression", "target_format", "provenance"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "id": {"type": "string", "minLength": 1},
+    "source_locator": {
+      "type": "object",
+      "required": ["page"],
+      "additionalProperties": false,
+      "properties": {
+        "page": {"type": "integer", "minimum": 1},
+        "pages": {"type": "array", "items": {"type": "integer", "minimum": 1}, "minItems": 1, "uniqueItems": true}
+      }
+    },
+    "anchor_block_ids": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string"}},
+    "placement": {"enum": ["inline", "display", "inline_group", "table_header_group"]},
+    "source_representation": {"type": "string", "minLength": 1},
+    "normalized_expression": {"type": "string", "minLength": 1},
+    "latex": {"type": "string"},
+    "variables": {
+      "type": "array",
+      "items": {"type": "object", "additionalProperties": false, "required": ["symbol", "meaning_target"], "properties": {"symbol": {"type": "string"}, "meaning_target": {"type": "string"}}}
+    },
+    "equation_number": {"type": ["string", "null"]},
+    "target_format": {"const": "OMML"},
+    "qa_flags": {"type": "array", "items": {"type": "string"}},
+    "notes": {"type": "array", "items": {"type": "string"}},
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source_asset_id", "method"],
+      "properties": {
+        "source_asset_id": {"type": "string", "minLength": 1},
+        "method": {"enum": ["manual", "pdf_text", "ocr", "machine_alignment", "imported_map", "synthetic_fixture"]},
+        "revision": {"type": "string"},
+        "decision_ids": {"type": "array", "items": {"type": "string"}, "uniqueItems": true}
+      }
+    }
+  }
+}

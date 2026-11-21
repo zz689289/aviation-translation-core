@@ -1,0 +1,84 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/aviation-technical-translation/publication_evidence.schema.json",
+  "title": "Publication visual and semantic QA evidence",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "layout_profile_id", "caption_checks", "toc_spacing", "special_sections", "brand_assets"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "layout_profile_id": {"enum": ["source_faithful", "zh_formal_print", "personal_zh_review", "personal_paper_review"]},
+    "caption_checks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["object_id", "kind", "style_name", "status"],
+        "properties": {
+          "object_id": {"type": "string", "minLength": 1},
+          "kind": {"enum": ["figure", "table"]},
+          "style_name": {"type": "string", "minLength": 1},
+          "font_latin": {"type": "string"},
+          "font_cjk": {"type": "string"},
+          "size_pt": {"type": "number", "exclusiveMinimum": 0},
+          "status": {"enum": ["PASS", "FAIL"]}
+        }
+      }
+    },
+    "toc_spacing": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source_compared", "required_checks", "terminal_entry_status", "group_spacing_status", "special_entry_spacing_status"],
+      "properties": {
+        "source_compared": {"type": "boolean"},
+        "required_checks": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["terminal_entry", "group_spacing", "special_entries"],
+          "properties": {
+            "terminal_entry": {"type": "boolean"},
+            "group_spacing": {"type": "boolean"},
+            "special_entries": {"type": "boolean"}
+          }
+        },
+        "terminal_entry_status": {"enum": ["PASS", "FAIL", "NOT_APPLICABLE"]},
+        "group_spacing_status": {"enum": ["PASS", "FAIL", "NOT_APPLICABLE"]},
+        "special_entry_spacing_status": {"enum": ["PASS", "FAIL", "NOT_APPLICABLE"]}
+      }
+    },
+    "special_sections": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["section_id", "section_role", "source_compared", "spacing_override_applied", "status"],
+        "properties": {
+          "section_id": {"type": "string", "minLength": 1},
+          "section_role": {"enum": ["annex", "bibliography", "back_cover", "other"]},
+          "source_compared": {"type": "boolean"},
+          "spacing_override_applied": {"type": "boolean"},
+          "status": {"enum": ["PASS", "FAIL"]}
+        }
+      }
+    },
+    "brand_assets": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["asset_id", "asset_type", "full_display", "crop", "page_bound_clipping", "container_clipping", "aspect_ratio_locked", "pdf_visual_status"],
+        "properties": {
+          "asset_id": {"type": "string", "minLength": 1},
+          "asset_type": {"enum": ["flag", "logo", "seal", "other"]},
+          "full_display": {"type": "boolean"},
+          "crop": {"enum": ["none", "present"]},
+          "page_bound_clipping": {"type": "boolean"},
+          "container_clipping": {"type": "boolean"},
+          "aspect_ratio_locked": {"type": "boolean"},
+          "pdf_visual_status": {"enum": ["PASS", "FAIL", "UNREVIEWED"]},
+          "page": {"type": "integer", "minimum": 1}
+        }
+      }
+    }
+  }
+}

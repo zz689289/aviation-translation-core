@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/aviation-technical-translation/footnote.schema.json",
+  "title": "Word footnote record",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "id", "source_locator", "number", "numbering_scope", "anchor_block_id", "source_text", "target_text", "provenance"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "id": {"type": "string"},
+    "source_locator": {
+      "type": "object",
+      "required": ["page"],
+      "additionalProperties": false,
+      "properties": {
+        "page": {"type": "integer", "minimum": 1},
+        "pages": {"type": "array", "items": {"type": "integer", "minimum": 1}, "minItems": 1, "uniqueItems": true}
+      }
+    },
+    "number": {"type": "integer", "minimum": 1},
+    "numbering_scope": {"enum": ["document", "section", "page"]},
+    "anchor_block_id": {"type": "string"},
+    "source_text": {"type": "string"},
+    "translation_reference_text": {"type": "string"},
+    "target_text": {"type": "string"},
+    "qa_flags": {"type": "array", "items": {"type": "string"}},
+    "notes": {"type": "array", "items": {"type": "string"}},
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source_asset_id", "method"],
+      "properties": {
+        "source_asset_id": {"type": "string", "minLength": 1},
+        "method": {"enum": ["manual", "pdf_text", "ocr", "machine_alignment", "imported_map", "synthetic_fixture"]},
+        "revision": {"type": "string"},
+        "decision_ids": {"type": "array", "items": {"type": "string"}, "uniqueItems": true}
+      }
+    }
+  }
+}

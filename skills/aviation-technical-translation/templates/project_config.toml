@@ -1,0 +1,9 @@
+# Codex 0.153.4 / current official subagent configuration.
+# Default for translation projects. The separate QA role pins Sol/medium.
+model = "gpt-6.2-sol"
+model_reasoning_effort = "high"
+
+# Cap spawned children excluding main.
+[agents]
+enabled = true
+max_concurrent_threads_per_session = 1

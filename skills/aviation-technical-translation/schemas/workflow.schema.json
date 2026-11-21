@@ -1,0 +1,320 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Aviation mechanical gate requests 1.2.2",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "command",
+    "spec"
+  ],
+  "properties": {
+    "command": {
+      "enum": [
+        "snapshot",
+        "verify-snapshot",
+        "route",
+        "cache",
+        "coverage",
+        "scope",
+        "plan"
+      ]
+    },
+    "spec": {
+      "type": "object"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "command": {
+            "const": "snapshot"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "spec": {
+            "required": [
+              "artifacts",
+              "dependencies"
+            ],
+            "properties": {
+              "artifacts": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "id",
+                    "role",
+                    "path"
+                  ],
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "role": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "path": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  }
+                }
+              },
+              "dependencies": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "command": {
+            "const": "verify-snapshot"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "spec": {
+            "required": [
+              "artifacts",
+              "dependencies",
+              "snapshot_id"
+            ],
+            "properties": {
+              "artifacts": {
+                "type": "array",
+                "minItems": 1
+              },
+              "dependencies": {
+                "type": "object"
+              },
+              "snapshot_id": {
+                "type": "string",
+                "pattern": "^[0-9a-f]{64}$"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "command": {
+            "const": "route"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "spec": {
+            "required": [
+              "findings"
+            ],
+            "properties": {
+              "findings": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "id",
+                    "status"
+                  ],
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "status": {
+                      "enum": [
+                        "PENDING",
+                        "OPEN",
+                        "RESOLVED"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "command": {
+            "const": "cache"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "spec": {
+            "required": [
+              "record",
+              "current"
+            ],
+            "properties": {
+              "record": {
+                "type": "object"
+              },
+              "current": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "command": {
+            "const": "coverage"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "spec": {
+            "required": [
+              "snapshot",
+              "snapshot_id",
+              "source_inventory_snapshot_id",
+              "source_inventory",
+              "executor_inventory",
+              "reviews",
+              "coverage_scope",
+              "source_pages",
+              "source_page_count",
+              "source_pages_inspected",
+              "source_inventory_basis",
+              "source_inspection_evidence",
+              "layer_review",
+              "executor_thread_id",
+              "qa_thread_id",
+              "dispatch_evidence",
+              "dispatch_record"
+            ],
+            "properties": {
+              "snapshot": {
+                "type": "object"
+              },
+              "coverage_scope": {
+                "enum": [
+                  "full_document",
+                  "declared_sample"
+                ]
+              },
+              "source_page_count": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "source_inventory": {
+                "type": "array"
+              },
+              "executor_inventory": {
+                "type": "array"
+              },
+              "reviews": {
+                "type": "array"
+              },
+              "source_pages": {
+                "type": "array",
+                "minItems": 1,
+                "uniqueItems": true,
+                "items": {
+                  "type": "integer",
+                  "minimum": 1
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "command": {
+            "const": "scope"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "spec": {
+            "required": [
+              "actual_page_count",
+              "change_kinds"
+            ],
+            "properties": {
+              "actual_page_count": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "change_kinds": {
+                "type": "array",
+                "minItems": 1,
+                "uniqueItems": true,
+                "items": {
+                  "enum": [
+                    "text",
+                    "format",
+                    "font",
+                    "margin",
+                    "numbering",
+                    "section_pagination",
+                    "render_environment",
+                    "checker",
+                    "metadata"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "command": {
+            "const": "plan"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "spec": {
+            "required": [
+              "task"
+            ],
+            "properties": {
+              "task": {
+                "enum": [
+                  "excerpt",
+                  "translate",
+                  "repair",
+                  "qa",
+                  "resume"
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}

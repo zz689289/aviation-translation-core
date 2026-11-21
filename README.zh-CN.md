@@ -1,10 +1,22 @@
-# Aviation Translation Core（民航技术翻译与 QA 核心）
+# 航空技术文献翻译 Skill
 
 [English](README.md)
 
-**公开源码仓库——当前版本 v0.1.1。** 面向民航技术英中翻译的规则、术语/数字/结构机械检查及 QA 交接轻量核心。现有 Skill 标识为 `aviation-translation-core`；本目录本身并未安装为 Skill。
+**aviation-technical-translation 1.2.2-rc7** 可直接安装到 Codex，用于将英文民航论文与手册翻译成简体中文，并核对术语、图表、公式和实际页面。
 
-面向能够准备独立源文证据、处理语义疑点的翻译人员和审核人员。**脚本不会自动翻译。** 英文及中文 Demo 均为原创合成输入，不是模型性能结果，也不代表实际译文质量。
+1. 下载[完整 Skill 安装包](downloads/aviation-technical-translation-1.2.2-rc7.zip)和 [SHA-256 校验值](downloads/SHA256SUMS.txt)，也可以让 Codex 从安装提示词中的版本地址直接获取。
+2. 把[安装提示词](skills/aviation-technical-translation/prompts/INSTALL_PROMPT.md)发给 Codex。它会安装个人 Skill 和独立 QA 角色，检查字体，并通过命令行实际生成、渲染和回读一份 PDF。
+3. 新开对话，附上英文原件并发送[推荐翻译提示词](skills/aviation-technical-translation/prompts/TRANSLATION_PROMPT.md)。开头的 JSON 可直接修改字体、字号和行距。
+
+默认中文正文宋体 12 pt、基线距 18 pt，中文标题黑体，西文及数字使用 Times New Roman。需要精确字号和行距时，把 `allow_sparse_adjustment` 改为 false。翻译执行与验收测试使用 `gpt-6.2-sol/high`，独立 QA 默认 `gpt-6.2-sol/medium`，仅对记录了原因的难项升档。全程禁用 Computer Use。
+
+![原创采样间隔示例的英文与中文实际 PDF 页面](docs/images/synthetic-layout.png)
+
+图中是原创示例的实际排版，两侧按相同比例呈现。百页手册可以在一次请求内[分批翻译与续接](skills/aviation-technical-translation/references/long_translation.md)，再[核对成品字体及间距](skills/aviation-technical-translation/references/typography_and_headless_qa.md)。需要可编辑 DOCX 时，可按[本机 Word 导出说明](skills/aviation-technical-translation/references/word_runtime_setup.md)配置。字体与第三方运行环境由使用者在本机安装。
+
+## 独立审校核心
+
+原有 `aviation-translation-core` v0.1.1 命令行和合成示例仍位于仓库根目录。下文介绍这套核心工具。
 
 ## 能做什么
 
@@ -43,7 +55,7 @@ R1 的 Windows 回归记录为 99 项中 98 通过、0 失败、1 项文件符�
 
 Copyright (c) 2026 Hug800mhz。项目自有核心、规则/文档及原创示例按根目录标准 [MIT 许可证](LICENSE) 提供。第三方依赖保持各自许可，本授权不授予输入原文或他人材料的权利。按 LICENSE 要求，在所有副本或软件的重要部分中保留版权和许可声明；可选致谢不能替代这些声明。
 
-仓库现已公开，当前软件版本为 v0.1.1；版本状态不改变本副本所附 MIT 授权。已核对的纯源码分发依赖范围及各依赖的独立许可见[第三方说明](THIRD_PARTY_NOTICES.md)。
+独立审校核心的版本为 v0.1.1；版本状态不改变本副本所附 MIT 授权。已核对的纯源码分发依赖范围及各依赖的独立许可见[第三方说明](THIRD_PARTY_NOTICES.md)。
 
 ### 致谢（可选）
 

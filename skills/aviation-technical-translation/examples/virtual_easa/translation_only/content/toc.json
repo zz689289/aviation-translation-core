@@ -1,0 +1,8 @@
+{
+  "schema_version": "1.0",
+  "source_basis": {"asset_id": "source-en", "pages": [1, 2]},
+  "entries": [
+    {"block_id": "scope-title", "include": true, "level": 1, "source_style": "Heading 1", "target_style": "Heading 1"},
+    {"block_id": "annex-c-title", "include": false, "level": 1, "source_style": "Heading 1", "target_style": "Heading 1 NoTOC"}
+  ]
+}

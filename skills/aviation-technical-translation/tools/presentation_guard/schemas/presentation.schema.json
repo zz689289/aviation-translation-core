@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object", "additionalProperties": false,
+  "$defs": {"ref": {"type": "object", "additionalProperties": false,
+    "properties": {"path": {"type": "string", "minLength": 1}, "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}}, "required": ["path", "sha256"]}},
+  "properties": {
+    "version": {"const": 1},
+    "scope_ids": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+    "source_artifact": {"$ref": "#/$defs/ref"}, "target_artifact": {"$ref": "#/$defs/ref"},
+    "source_profile": {"$ref": "#/$defs/ref"}, "target_profile": {"$ref": "#/$defs/ref"}
+  },
+  "required": ["version", "scope_ids", "source_artifact", "target_artifact", "source_profile", "target_profile"]
+}

@@ -1,0 +1,12 @@
+{
+  "schema_version": "1.1",
+  "profile_id": "source_faithful",
+  "description": "Use source- or template-derived geometry, fonts, sizes, spacing, and semantic style names without imposing a Chinese house style.",
+  "inherits_source_geometry": true,
+  "math_font": "Cambria Math",
+  "default_style_names": {
+    "figure_caption": "Caption",
+    "table_caption": "Caption"
+  },
+  "style_defaults": {}
+}

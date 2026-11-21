@@ -7,6 +7,8 @@ metadata:
 
 # Technical translation core
 
+For document translation, install [aviation-technical-translation 1.2.2-rc7](skills/aviation-technical-translation/SKILL.md) using its [installation prompt](skills/aviation-technical-translation/prompts/INSTALL_PROMPT.md). This root entry point serves the standalone review core.
+
 This is the public v0.1.1 source edition. This repository checkout is not itself an installed Skill. Preserve the requested scope. For an excerpt, apply [translation rules](references/translation_policy.md) and [terminology rules](references/terminology_disambiguation.md); do not create a project merely to answer a short question.
 
 For a structured review, establish independent source evidence before reading the candidate's proposed expected values. Use [the input contract](docs/input_contract.md). Run `scripts/compare_source.py` to locate source mappings in a supported PDF, `scripts/check_invariants.py` for numeric/structural checks, and `scripts/term_guard.py` for terminology contexts. Commands are in [quickstart](docs/quickstart.md). They are not translators or semantic assessors.

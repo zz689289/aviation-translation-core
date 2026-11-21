@@ -1,0 +1,132 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/aviation-technical-translation/escalation.schema.json",
+  "title": "Cost-aware aviation translation escalation queue",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "policy_version", "project_id", "cost_profile", "profile_source", "escalation_mode", "escalation_mode_source", "automatic_escalation_permitted", "handoff_required", "assessor_tier", "input_sha256", "status", "summary", "items"],
+  "properties": {
+    "schema_version": {"const": "1.1"},
+    "policy_version": {"const": "1.1.1"},
+    "project_id": {"type": "string", "minLength": 1},
+    "cost_profile": {"enum": ["economy", "balanced", "maximum_quality"]},
+    "profile_source": {"enum": ["cli", "project", "legacy_default"]},
+    "escalation_mode": {"enum": ["manual_handoff", "auto_escalate"]},
+    "escalation_mode_source": {"enum": ["cli", "project", "safe_default"]},
+    "automatic_escalation_permitted": {"type": "boolean"},
+    "handoff_required": {"type": "boolean"},
+    "assessor_tier": {"$ref": "#/$defs/reviewerTier"},
+    "input_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "status": {"enum": ["PASS", "BLOCKED"]},
+    "summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["input_count", "queue_count", "non_queue_count", "blocking_count", "policy_violation_count", "input_risk_counts", "queued_risk_counts"],
+      "properties": {
+        "input_count": {"type": "integer", "minimum": 0},
+        "queue_count": {"type": "integer", "minimum": 0},
+        "non_queue_count": {"type": "integer", "minimum": 0},
+        "blocking_count": {"type": "integer", "minimum": 0},
+        "policy_violation_count": {"type": "integer", "minimum": 0},
+        "input_risk_counts": {"$ref": "#/$defs/riskCounts"},
+        "queued_risk_counts": {"$ref": "#/$defs/riskCounts"}
+      }
+    },
+    "items": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/item"}
+    }
+  },
+  "$defs": {
+    "riskClass": {"enum": ["GREEN", "AMBER", "RED"]},
+    "reviewerTier": {"enum": ["automation", "economy_model", "standard_model", "highest_available_reasoning", "human_authority"]},
+    "riskCounts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["GREEN", "AMBER", "RED"],
+      "properties": {
+        "GREEN": {"type": "integer", "minimum": 0},
+        "AMBER": {"type": "integer", "minimum": 0},
+        "RED": {"type": "integer", "minimum": 0}
+      }
+    },
+    "sourceLocator": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["object_id"],
+      "properties": {
+        "object_id": {"type": "string", "minLength": 1},
+        "source_asset_id": {"type": "string"},
+        "page": {"type": "integer", "minimum": 1},
+        "pages": {"type": "array", "items": {"type": "integer", "minimum": 1}, "uniqueItems": true},
+        "order": {"type": "integer", "minimum": 1},
+        "section_path": {"type": "array", "items": {"type": "string"}},
+        "bbox": {"type": "array", "items": {"type": "number"}, "minItems": 4, "maxItems": 4}
+      }
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "locator", "summary", "authority"],
+      "properties": {
+        "kind": {"type": "string", "minLength": 1},
+        "locator": {"type": "string"},
+        "summary": {"type": "string", "minLength": 1},
+        "authority": {"type": "string"}
+      }
+    },
+    "route": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["required_reviewer_tier", "required_actions", "required_independent_review_count", "human_authority_required"],
+      "properties": {
+        "required_reviewer_tier": {"$ref": "#/$defs/reviewerTier"},
+        "required_actions": {"type": "array", "items": {"type": "string"}, "minItems": 1, "uniqueItems": true},
+        "required_independent_review_count": {"type": "integer", "minimum": 0},
+        "human_authority_required": {"type": "boolean"}
+      }
+    },
+    "item": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "category", "source_locator", "signals", "declared_risk_class", "effective_risk_class", "finding", "source_text", "target_text", "rule_id", "confidence", "confidence_basis", "evidence", "origin_assessor_tier", "effective_assessor_tier", "candidate_resolution", "proposal_only", "route", "blocking", "status", "policy_violations"],
+      "properties": {
+        "id": {"type": "string", "minLength": 1},
+        "category": {"type": "string", "minLength": 1},
+        "source_locator": {"$ref": "#/$defs/sourceLocator"},
+        "signals": {"type": "array", "items": {"type": "string", "minLength": 1}, "uniqueItems": true},
+        "declared_risk_class": {"anyOf": [{"$ref": "#/$defs/riskClass"}, {"type": "null"}]},
+        "effective_risk_class": {"$ref": "#/$defs/riskClass"},
+        "finding": {"type": "string", "minLength": 1},
+        "source_text": {"type": "string"},
+        "target_text": {"type": "string"},
+        "rule_id": {"type": ["string", "null"]},
+        "confidence": {"type": ["number", "null"], "minimum": 0, "maximum": 1},
+        "confidence_basis": {"type": "string"},
+        "evidence": {"type": "array", "items": {"$ref": "#/$defs/evidence"}},
+        "origin_assessor_tier": {"anyOf": [{"$ref": "#/$defs/reviewerTier"}, {"type": "null"}]},
+        "effective_assessor_tier": {"$ref": "#/$defs/reviewerTier"},
+        "candidate_resolution": {"type": ["string", "null"]},
+        "proposal_only": {"type": "boolean"},
+        "route": {"$ref": "#/$defs/route"},
+        "blocking": {"const": true},
+        "status": {"const": "OPEN"},
+        "policy_violations": {"type": "array", "items": {"type": "string"}, "uniqueItems": true}
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"escalation_mode": {"const": "manual_handoff"}}},
+      "then": {"properties": {"automatic_escalation_permitted": {"const": false}}}
+    },
+    {
+      "if": {"properties": {"escalation_mode": {"const": "auto_escalate"}}},
+      "then": {"properties": {"automatic_escalation_permitted": {"const": true}, "handoff_required": {"const": false}}}
+    },
+    {
+      "if": {"properties": {"status": {"const": "PASS"}}},
+      "then": {"properties": {"handoff_required": {"const": false}}}
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "schema_version": "1.0",
+  "project_root": ".",
+  "locked": true,
+  "requested_mode": "auto",
+  "selected_mode": "translation_only",
+  "allow_downgrade": false,
+  "capabilities": {
+    "microsoft_word": false,
+    "authoritative_renderer": "none",
+    "renderer_available": false
+  },
+  "inputs": [
+    {
+      "id": "source-en",
+      "role": "source_document",
+      "path": "inputs/easa-next-d7-2-en.pdf",
+      "media_type": "application/pdf",
+      "language": "en",
+      "authority_rank": 1,
+      "required": true,
+      "read_only": true,
+      "authoritative": true,
+      "sha256": "830d504209def9fac46d7a6738fc9d7f94d93f6c7f00605562e4c2ad911033ca",
+      "size_bytes": 4447,
+      "detection": {
+        "method": "declared",
+        "confidence": 1.0
+      },
+      "page_count": 7
+    },
+    {
+      "id": "terms",
+      "role": "terminology",
+      "path": "inputs/approved_terms.csv",
+      "media_type": "text/csv",
+      "language": "bilingual",
+      "authority_rank": 2,
+      "required": false,
+      "read_only": true,
+      "authoritative": false,
+      "sha256": "f8eb0fe719e7872d0873f5a6c14fb519a22cca9ade89322a25f9be33506b7834",
+      "size_bytes": 125,
+      "detection": {
+        "method": "declared",
+        "confidence": 1.0
+      },
+      "approved": true
+    }
+  ],
+  "selection_reasons": [
+    "No approved publication layout or renderer is supplied."
+  ],
+  "blocking_issues": [],
+  "warnings": []
+}
